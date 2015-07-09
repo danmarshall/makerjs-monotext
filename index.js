@@ -14,7 +14,7 @@ function monotext() {
 	var c2 = [u, u3];
 	var pne = [u2, u4];
 	var pnw = [0, u4];
-	var k = u2 + u * .5;
+	var k = u2 + u * .75;
 	var gap = 15;
 	var gc = [gap, u2];
 	var gc2 = [u2 - gap, u2];
