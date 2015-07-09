@@ -15,9 +15,10 @@ function monotext() {
 	var pne = [u2, u4];
 	var pnw = [0, u4];
 	var k = u2 + u * .5;
-	var gap = 10;
+	var gap = 15;
 	var gc = [gap, u2];
 	var gc2 = [u2 - gap, u2];
+	var sa = 10;
 	
 	function sp(letterFn, index, offset) {
 	    var letter = new letterFn();
@@ -41,11 +42,28 @@ function monotext() {
 	    return new arc('lowarc', c1, u, 180, 90)
 	}
 	
+	function toparc1() {
+        return new arc('toparc1', c2, u, 0, 90 - sa);		
+	}
+	
+	function toparc2() {
+        return new arc('toparc2', c2, u, 90 + sa, 180);		
+	}
+	
+	function botarc1() {
+        return new arc('botarc1', c1, u, 180, 270 - sa);		
+	}
+	
+	function botarc2() {
+        return new arc('botarc2', c1, u, 270 + sa, 0);		
+	}
+	
 	var alpha = {
 	    a: function() {
 	        this.id = 'a';
 	        this.paths = [
-	            new arc('upper', c2, u, 0, 180),
+	            toparc1(),
+				toparc2(),
 	            new line('left', [0, 0], [0, u3]),
 	            new line('right', [u2, 0], [u2, u3]),
 	            crossbar()
@@ -63,8 +81,10 @@ function monotext() {
 	    g: function() {
 	        this.id = 'g';
 	        this.paths = [
-	            new arc('toparc', c2, u, 0, 180),
-	            new arc('bottomarc', c1, u, 180, 0),
+	            toparc1(),
+				toparc2(),
+	            botarc1(),
+				botarc2(),
 	            new line('left', [0, u], [0, u3]),
 	            new line('right', [u2, u], [u2, u2]),
 	            new line('cross', [u, u2], [u2, u2])
@@ -73,7 +93,8 @@ function monotext() {
 	    j: function() {
 	        this.id = 'j';
 	        this.paths = [
-	            new arc('lowarc', c1, u, 180, 0),
+	            botarc1(),
+				botarc2(),
 	            new line('right', [u2, u], pne)
 	        ];
 	    },
@@ -97,8 +118,10 @@ function monotext() {
 	    o: function() {
 	        this.id = 'o';
 	        this.paths = [
-	            new arc('toparc', c2, u, 0, 180),
-	            new arc('bottomarc', c1, u, 180, 0),
+	            toparc1(),
+				toparc2(),
+	            botarc1(),
+				botarc2(),
 	            new line('left', [0, u], [0, u3]),
 	            new line('right', [u2, u], [u2, u3])
 	        ];
@@ -107,17 +130,19 @@ function monotext() {
 	        this.id = 'r';
 	        this.paths = [
 	            left(),
-	            new line('top', pnw, [u, u4]),
+	            new line('top', pnw, [u - gap, u4]),
 	            new arc('upper', c2, u, 270, 90),
-	            new line('cross', [gap, u2], [u, u2]),
+	            new line('cross', [gap, u2], [u - gap, u2]),
 	            lowangle()
 	        ];
 	    },
 	    s: function() {
 	        this.id = 's';
 	        this.paths = [
-	            new arc('upper', c2, u, 0, 270),
-	            new arc('lowarc', c1, u, 180, 90)
+	            toparc1(),
+	            botarc1(),
+	            new arc('upper', c2, u, 90 + sa, 270 - sa),
+	            new arc('lowarc', c1, u, 270 + sa, 90 - sa )
 	        ];
 	    },
 	    dot: function() {
