@@ -20,155 +20,140 @@ function monotext() {
 	var gc2 = [u2 - gap, u2];
 	var sa = 10;
 	
-	function sp(letterFn, index, offset) {
+	function sp(letterFn, index) {
 	    var letter = new letterFn();
-	    letter.origin = [index * k + (offset || 0), 0];
+	    letter.origin = [index * k, 0];
 	    return letter;
 	}
 	
 	function left() {
-	    return new line('left', [0, 0], pnw);
+	    return new line([0, 0], pnw);
 	}
 	
 	function crossbar() {
-	    return new line('cross', gc, gc2);
+	    return new line(gc, gc2);
 	}
 	
 	function lowangle() {
-	    return new line('lowangle', gc, [u2, 0])
+	    return new line(gc, [u2, 0])
 	}
 	
 	function lowarc() {
-	    return new arc('lowarc', c1, u, 180, 90)
+	    return new arc(c1, u, 180, 90)
 	}
 	
 	function toparc1() {
-        return new arc('toparc1', c2, u, 0, 90 - sa);		
+        return new arc(c2, u, 0, 90 - sa);		
 	}
 	
 	function toparc2() {
-        return new arc('toparc2', c2, u, 90 + sa, 180);		
+        return new arc(c2, u, 90 + sa, 180);		
 	}
 	
 	function botarc1() {
-        return new arc('botarc1', c1, u, 180, 270 - sa);		
+        return new arc(c1, u, 180, 270 - sa);		
 	}
 	
 	function botarc2() {
-        return new arc('botarc2', c1, u, 270 + sa, 0);		
+        return new arc(c1, u, 270 + sa, 0);		
 	}
 	
 	var alpha = {
 	    a: function() {
-	        this.id = 'a';
-	        this.paths = [
-	            toparc1(),
-				toparc2(),
-	            new line('left', [0, 0], [0, u3]),
-	            new line('right', [u2, 0], [u2, u3]),
-	            crossbar()
-	        ];
+	        this.paths = {
+	            toparc1: toparc1(),
+				toparc2: toparc2(),
+	            left: new line([0, 0], [0, u3]),
+	            right: new line([u2, 0], [u2, u3]),
+	            crossbar: crossbar()
+			};
 	    },
 	    e: function() {
-	        this.id = 'e';
-	        this.paths = [
-	            left(),
-	            new line('top', pnw, pne),
-	            new line('bottom', [0, 0], [u2, 0]),
-	            crossbar()
-	        ];
+	        this.paths = {
+	            left: left(),
+	            top: new line(pnw, pne),
+	            bottom: new line([0, 0], [u2, 0]),
+	            crossbar: crossbar()
+			};
 	    },
 	    g: function() {
-	        this.id = 'g';
-	        this.paths = [
-	            toparc1(),
-				toparc2(),
-	            botarc1(),
-				botarc2(),
-	            new line('left', [0, u], [0, u3]),
-	            new line('right', [u2, u], [u2, u2]),
-	            new line('cross', [u, u2], [u2, u2])
-	        ];
+	        this.paths = {
+	            toparc1: toparc1(),
+				toparc2: toparc2(),
+	            botarc1: botarc1(),
+				botarc2: botarc2(),
+	            left:  new line([0, u], [0, u3]),
+	            right: new line([u2, u], [u2, u2]),
+	            cross: new line([u, u2], [u2, u2])
+			};
 	    },
 	    j: function() {
-	        this.id = 'j';
-	        this.paths = [
-	            botarc1(),
-				botarc2(),
-	            new line('right', [u2, u], pne)
-	        ];
+	        this.paths = {
+	            botarc1: botarc1(),
+				botarc2: botarc2(),
+	            right: new line([u2, u], pne)
+			};
 	    },
 	    k: function() {
-	        this.id = 'k';
-	        this.paths = [
-	            left(),
-	            new line('topcross', pne, gc),
-	            lowangle()
-	        ];
+	        this.paths = {
+	            left: left(),
+	            topcross: new line(pne, gc),
+	            lowangle: lowangle()
+			};
 	    },
 	    m: function() {
-	        this.id = 'm';
-	        this.paths = [
-	            left(),
-	            new line('right', [u2, 0], pne),
-	            new line('leftcross', [0, u4], [u, u2]),
-	            new line('rightcross', [u, u2], [u2, u4])
-	        ];
+	        this.paths = {
+	            left: left(),
+	            right: new line([u2, 0], pne),
+	            leftcross: new line([0, u4], [u, u2]),
+	            rightcross: new line([u, u2], [u2, u4])
+			};
 	    },
 	    o: function() {
-	        this.id = 'o';
-	        this.paths = [
-	            toparc1(),
-				toparc2(),
-	            botarc1(),
-				botarc2(),
-	            new line('left', [0, u], [0, u3]),
-	            new line('right', [u2, u], [u2, u3])
-	        ];
+	        this.paths = {
+	            toparc1: toparc1(),
+				toparc2: toparc2(),
+	            botarc1: botarc1(),
+				botarc2: botarc2(),
+	            left: new line([0, u], [0, u3]),
+	            right: new line([u2, u], [u2, u3])
+			};
 	    },
 	    r: function() {
-	        this.id = 'r';
-	        this.paths = [
-	            left(),
-	            new line('top', pnw, [u - gap, u4]),
-	            new arc('upper', c2, u, 270, 90),
-	            new line('cross', [gap, u2], [u - gap, u2]),
-	            lowangle()
-	        ];
+	        this.paths = {
+	            left: left(),
+	            top: new line(pnw, [u - gap, u4]),
+	            upper: new arc(c2, u, 270, 90),
+	            cross: new line([gap, u2], [u - gap, u2]),
+	            lowangle: lowangle()
+			};
 	    },
 	    s: function() {
-	        this.id = 's';
-	        this.paths = [
-	            toparc1(),
-	            botarc1(),
-	            new arc('upper', c2, u, 90 + sa, 270 - sa),
-	            new arc('lowarc', c1, u, 270 + sa, 90 - sa )
-	        ];
+	        this.paths = {
+	            toparc1: toparc1(),
+	            botarc1: botarc1(),
+	            upper: new arc(c2, u, 90 + sa, 270 - sa),
+	            lowarc: new arc(c1, u, 270 + sa, 90 - sa )
+			};
 	    },
-	    dot: function() {
+	    ".": function() {
 	        var angle = 30;
-	        this.id = 'dot';
-	        this.paths = [
-	            new arc('dot', [u, up], up, 270 + angle, 270 - angle)
-	        ];
+	        this.paths = {
+	            dot: new arc([u, up], up, 270 + angle, 270 - angle)
+			};
 	    }
 	};
 
-    this.id = 'monotext',
-    this.models = [ 
-        sp(alpha.m, 0), 
-        sp(alpha.a, 1), 
-        sp(alpha.k, 2), 
-        sp(alpha.e, 3), 
-        sp(alpha.r, 4), 
-        sp(alpha.j, 5), 
-        sp(alpha.s, 6),
-        sp(alpha.dot, 7),
-        sp(alpha.o, 8),
-        sp(alpha.r, 9),
-        sp(alpha.g, 10)
-    ];
+    var models = this.models = {};
 
+	function addWord(word) {
+		for (var i=0; i < word.length; i++) {
+			var letter = word[i];
+			models[letter] = sp(alpha[letter], i);
+		}
+	}
+
+	addWord('makerjs.org');
 }
 
 module.exports = monotext;
