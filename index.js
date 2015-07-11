@@ -149,7 +149,7 @@ function monotext() {
 	function addWord(word) {
 		for (var i=0; i < word.length; i++) {
 			var letter = word[i];
-			models[letter] = sp(alpha[letter], i);
+			models['c' + i] = sp(alpha[letter], i);
 		}
 	}
 
