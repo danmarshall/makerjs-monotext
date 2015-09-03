@@ -1,6 +1,6 @@
 {
   "name": "makerjs-monotext",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Text for Maker.js",
   "main": "index.js",
   "scripts": {
